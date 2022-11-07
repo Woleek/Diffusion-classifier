@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 .ipynb_checkpoints/
 X_test.npy
 X_train.npy
 y_val.npy
 X_val.npy
 y_train.npy
+=======
+.ipynb_checkpoints/
+>>>>>>> f9db0a733d2b95e6cc5bbc91140440ebedd99d89
