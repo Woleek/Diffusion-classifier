@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import torch
 import csv
 import os
@@ -6,61 +5,29 @@ import os
 import utils_lightning
 
 def predict_labels(model):
-        
-    model.load_state_dict(torch.load('GRU.pt'))
+    """Predicts labels for training dataset. Model is loaded from saved state. Predicted labels are computed and saved to predictions.csv file.
+
+    Args:
+        model (LitModel): recurrent neural network model (GRU)
+    """
+    model.load_state_dict(torch.load('results/GRU.pt'))
     model.eval()
 
     dataset, dataloader = utils_lightning.load_test_data()
     n_tests = len(dataset)
 
     predictions = []
-    print("Started predicting\n")
     for index in range(n_tests):
         sample = dataset.__getitem__(index)[0].reshape(1, 300, 2)
         prediction = str(int(torch.argmax(model(sample))))
         predictions.append(prediction)
     
-    print(predictions)
-    
     i = 0
-    while os.path.exists(f"predictions{i}.csv"):
+    while os.path.exists(f"results/predictions{i}.csv"):
         i += 1
         
-    with open(f'predictions{i}.csv', mode='w', newline='') as csvfile:
+    with open(f'results/predictions{i}.csv', mode='w', newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter=',')
         writer.writerow(['index', 'class'])
         for idx, prediction in enumerate(predictions):
-=======
-import torch
-import csv
-import os
-
-import utils_lightning
-
-def predict_labels(model):
-        
-    model.load_state_dict(torch.load('GRU.pt'))
-    model.eval()
-
-    dataset, dataloader = utils_lightning.load_test_data()
-    n_tests = len(dataset)
-
-    predictions = []
-    print("Started predicting\n")
-    for index in range(n_tests):
-        sample = dataset.__getitem__(index)[0].reshape(1, 300, 2)
-        prediction = str(int(torch.argmax(model(sample))))
-        predictions.append(prediction)
-    
-    print(predictions)
-    
-    i = 0
-    while os.path.exists(f"predictions{i}.csv"):
-        i += 1
-        
-    with open(f'predictions{i}.csv', mode='w', newline='') as csvfile:
-        writer = csv.writer(csvfile, delimiter=',')
-        writer.writerow(['index', 'class'])
-        for idx, prediction in enumerate(predictions):
->>>>>>> f9db0a733d2b95e6cc5bbc91140440ebedd99d89
             writer.writerow([idx, prediction])
