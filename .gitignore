@@ -1,0 +1,6 @@
+.ipynb_checkpoints/
+X_test.npy
+X_train.npy
+y_val.npy
+X_val.npy
+y_train.npy

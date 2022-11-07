@@ -1,0 +1,8 @@
+batches:
+  test_bs: 100
+  train_bs: 100
+  val_bs: 100
+hidden_size: 300
+input_size: 2
+num_classes: 5
+num_layers: 2
