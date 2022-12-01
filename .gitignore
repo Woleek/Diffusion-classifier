@@ -6,3 +6,4 @@ y_val.npy
 X_val.npy
 y_train.npy
 __pycache__
+.vscode
